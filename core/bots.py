@@ -1,3 +1,4 @@
+from core.objects import Video
 from constants import DOWNLOAD_FOLDER
 from jinja2 import Environment, FileSystemLoader
 from selenium.webdriver.common.action_chains import ActionChains
@@ -9,9 +10,8 @@ import os
 
 DEFAULT_WAIT_INCREMENT = 5
 
+
 # make a class that can download videos
-
-
 class TikTokBot:
     def __init__(self, wait_increment=DEFAULT_WAIT_INCREMENT, headless=False):
         # set the wait increment
@@ -29,13 +29,24 @@ class TikTokBot:
         # create a requests session
         self.session = requests.Session()
 
+    # make a function to get the video data
+    def get_data(self, link):
+        # just make a video object and it will handle the rest
+        video = Video(link, self.driver)
+
+        return video
+
     # use the link and filepath (home folder designated by another function in the program)
-    def download_video(self, link, filename, end_directory=os.getcwd()):
-        # go to the url
-        self.driver.get(link)
+
+    def download_video(self, filename, link=None, end_directory=os.getcwd()):
+        # go to the url if it is indicated
+        if link:
+            self.driver.get(link)
+
+            # wait for it to load
+            eel.sleep(self.wait_increment)
 
         # browser only loads one video (rest are just pictures)
-        eel.sleep(self.wait_increment)
         video_elem = self.driver.find_element_by_xpath('//video')
         source_link = video_elem.get_attribute('src')
 

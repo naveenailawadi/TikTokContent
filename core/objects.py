@@ -6,7 +6,7 @@ from selenium.common.exceptions import NoSuchElementException
 class Comment:
     def __init__(self, element):
         # use the element to get the text
-        self.text = element.find_element_by_xpath('.//*//p').text
+        self.text = element.find_element_by_xpath('.//*//p//span[@class="jsx-1335515755"]').text
 
         # find the like count
         self.likes = int(element.find_element_by_xpath(

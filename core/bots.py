@@ -67,6 +67,9 @@ class TikTokBot:
         script = template.render(
             link=source_link, file=filename)
 
+        # go to the base video link
+        self.driver.get(source_link)
+
         # use the driver to start the download
         self.driver.execute_script(script)
 

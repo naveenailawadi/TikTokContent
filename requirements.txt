@@ -1,3 +1,5 @@
 Eel
 Jinja2
 selenium
+moviepy
+Wand

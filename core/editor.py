@@ -1,37 +1,38 @@
-from constants import DEFAULT_BORDER, DEFAULT_FONT
+import constants
 from moviepy.editor import *
 
 
-# wrap the editor in a movie object
-class Movie:
-    def __init__(self, filename):
-        # set the filename
-        self.filename = filename
+# rewrite the video
+def rewrite(new_video, new_filepath):
+    new_video.write_videofile(new_filepath)
+
+
+# make a function to add right and left borders
+def add_borders(infile, outfile, rborder=constants.DEFAULT_RBORDER, lborder=constants.DEFAULT_LBORDER,
+                tborder=constants.DEFAULT_TBORDER, bborder=constants.DEFAULT_BBORDER,
+                border_color=constants.DEFAULT_BORDER_COLOR):
+
+    # make a video clip
+    clip = VideoFileClip(infile)
+
+    # add the borders
+    clip_with_borders = clip.margin(
+        right=rborder, left=lborder, top=tborder, bottom=bborder, color=border_color)
 
     # rewrite the video
-    def rewrite(self, new_video):
-        new_video.write_videofile(self.filename)
+    rewrite(clip_with_borders, outfile)
 
-    # make a function to add right and left borders
-    def add_rl_borders(self, border=DEFAULT_BORDER):
-        # make a video clip
-        clip = VideoFileClip('sample.mp4')
 
-        # add the borders
-        clip_with_borders = clip.margin(right=border, left=border)
+# make a function to add text
+def add_text(infile, outfile, text, fontsize=constants.DEFAULT_FONTSIZE,
+             color=constants.DEFAULT_COLOR, font=constants.DEFAULT_FONT, pos=constants.DEFAULT_POSITION):
+    # open the video
+    video = VideoFileClip(infile)
 
-        # rewrite the video
-        self.rewrite(clip_with_borders)
+    # make a textclip
+    txt_clip = TextClip(text, fontsize=fontsize,
+                        color=color, font=font).set_duration(video.duration).set_pos(pos)
 
-    # make a function to add text
-    def add_text(self, text, font=DEFAULT_FONT, position=DEFAULT_POSITION):
-        # open the video
-        video = VideoFileClip(self.filename)
-
-        # make a textclip
-        txt_clip = TextClip(text, fontsize=FONT,
-                            color='white').with_position('center')
-
-        # combine them
-        result = CompositeVideoClip([video, txt_clip])
-        self.rewrite(result)
+    # combine them
+    result = CompositeVideoClip([video, txt_clip])
+    rewrite(result, outfile)

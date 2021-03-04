@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="header-table">
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="">
+                        <table class="table custom-table">
+                            <tbody>
+                                <!--Row for messages-->
+                                <tr>
+                                    <p id="messages" align="center"></p>
+                                </tr>
+                                <!--Row for rating posts-->
+                                <tr>
+                                    <td>
+                                        <input class="form-control" type="number" step="1" id="amount" placeholder="Amount">
+                                    </td>
+                                    <td>
+                                        <input class="form-control" type="text" id="exportFile" placeholder="Export File">
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <button class="btn btn-success" onclick="createAccounts();">Create Accounts</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </section>
+    <script src="/js/tools.js"></script>
+    <script src="/js/account_creation.js"></script>
+{% endblock %}

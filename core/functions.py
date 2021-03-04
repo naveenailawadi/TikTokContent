@@ -3,8 +3,13 @@ from core import editor
 import eel
 import os
 
+'''
 # make a tiktok bot
 BOT = TikTokBot()
+BOT.driver.get('https://www.tiktok.com/login')
+'''
+
+# note that you are NOT logged in
 LOGGED_IN = False
 
 

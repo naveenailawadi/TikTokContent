@@ -4,4 +4,4 @@ if __name__ == '__main__':
 
     eel.init('web')
 
-    eel.start('templates/gems.html', jinja_templates='templates')
+    eel.start('templates/main.html', jinja_templates='templates')

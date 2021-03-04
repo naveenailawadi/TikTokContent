@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="header-table">
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="">
+                        <table class="table custom-table" id="mainTable" style="display: none">
+                            <tbody>
+                                <!--Row for messages-->
+                                <tr>
+                                    <p id="messages" align="center"></p>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input class="form-control" type="text" id="postURL" placeholder="Video URL">
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <button class="btn btn-success" onclick="getVideoData();">Get Data</button>
+                                    </td>
+                                </tr>
+                                <!--Row for choosing a caption-->
+                                <tr id="chooseCaption">
+                                    <td>
+                                        <h3>Click a caption to add it:</h3>
+                                    </td>
+                                    <td></td>
+                                    <td id="captionOptions">
+                                        <p></p>
+                                        <p>
+                                            <button class="btn btn-warning" onclick="fillCaption();">THIS IS THE APPROPRIATE LENGTH OF A CAPTION</button>
+                                        </p>
+                                        <br>
+                                        <p>
+                                            <button class="btn btn-warning" onclick="fillCaption();">THIS IS THE APPROPRIATE LENGTH OF A CAPTION</button>
+                                        </p>
+                                        <br>
+                                        <p>
+                                            <button class="btn btn-warning" onclick="fillCaption();">THIS IS THE APPROPRIATE LENGTH OF A CAPTION</button>
+                                        </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input class="form-control" type="text" id="caption" placeholder="Caption">
+                                    </td>
+                                    <td></td>
+                                    <td>
+                                        <button class="btn btn-primary" onclick="createVideo();">Create Video</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <table class="table custom-table" id="loginTable">
+                            <tbody>
+                                <!--Row for login-->
+                                <tr>
+                                    <td>
+                                        <p>Please login to tiktok to use the software.</p>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary" onclick="login();">Logged In!</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                </div>
+            </div>
+
+        </section>
+    </section>
+    <script src="/js/tools.js"></script>
+    <script src="/js/main.js"></script>
+{% endblock %}

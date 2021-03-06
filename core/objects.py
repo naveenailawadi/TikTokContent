@@ -1,12 +1,14 @@
+import constants
 from selenium.common.exceptions import NoSuchElementException
+import eel
+
 
 # make a comment class
-
-
 class Comment:
     def __init__(self, element):
         # use the element to get the text
-        self.text = element.find_element_by_xpath('.//*//p//span[@class="jsx-1335515755"]').text
+        self.text = element.find_element_by_xpath(
+            './/*//p//span[@class="jsx-1335515755"]').text
 
         # find the like count
         self.likes = int(element.find_element_by_xpath(
@@ -41,7 +43,8 @@ class Video:
         for path in paths:
             # get the caption via a path
             try:
-                self.caption = self.driver.find_element_by_xpath('//h1')
+                self.caption = self.driver.find_element_by_xpath(path).text
+                eel.sleep(constants.DEFAULT_WAIT_INCREMENT)
 
                 # break the loop if you find a caption
                 break
@@ -57,6 +60,7 @@ class Video:
             comment_btn = btns[1]
 
             comment_btn.click()
+            eel.sleep(constants.DEFAULT_WAIT_INCREMENT)
         except IndexError:
             # means the user already inputted a link that goes to the comments
             pass

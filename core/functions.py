@@ -1,13 +1,12 @@
 from core.bots import TikTokBot
 from core import editor
+import constants
 import eel
 import os
 
-'''
 # make a tiktok bot
 BOT = TikTokBot()
 BOT.driver.get('https://www.tiktok.com/login')
-'''
 
 # note that you are NOT logged in
 LOGGED_IN = False
@@ -24,9 +23,16 @@ def login():
 @eel.expose
 def get_video_data(link):
     if not LOGGED_IN:
-        return {'success': False}
+        return {'success': False, 'message': 'You must be log in to tiktok to use this feature.'}
 
     video = BOT.get_data(link)
+
+    # limit the amount of comments used
+    video.comments = [
+        comment.__dict__ for comment in video.comments]
+
+    video.comments = sorted(video.comments, key=lambda k: k['likes'], reverse=True)[
+        :constants.COMMENT_LIMIT]
 
     info = video.__dict__
 
@@ -38,8 +44,8 @@ def get_video_data(link):
 # make a function to create the video
 @eel.expose
 def create_video(filename, text):
-    # download the video with the bot
-    BOT.download_video(filename)
+    # download the video with the bot (reassign based on where the content was moved)
+    filename = BOT.download_video(filename)
 
     # have a borders output
     borders_file = f"{filename.split('.')[0]}_borders.mp4"

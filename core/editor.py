@@ -25,13 +25,24 @@ def add_borders(infile, outfile, rborder=constants.DEFAULT_RBORDER, lborder=cons
 
 # make a function to add text
 def add_text(infile, outfile, text, fontsize=constants.DEFAULT_FONTSIZE,
-             color=constants.DEFAULT_COLOR, font=constants.DEFAULT_FONT, pos=constants.DEFAULT_POSITION):
+             color=constants.DEFAULT_COLOR, font=constants.DEFAULT_FONT, pos=constants.DEFAULT_POSITION,
+             hcrop=constants.HCROP, vcrop=constants.VCROP):
     # open the video
     video = VideoFileClip(infile)
 
+    (x, y) = video.size
+
+    x -= hcrop
+    y -= vcrop
+
     # make a textclip
-    txt_clip = TextClip(text, fontsize=fontsize,
-                        color=color, font=font).set_duration(video.duration).set_pos(pos)
+    txt_clip = (TextClip(text, fontsize=fontsize,
+                         color=color, font=font, method='caption', size=(x, y))
+                .set_duration(video.duration)
+                .set_pos(pos))
+
+    print(f"Video size: {video.size}")
+    print(f"pos: {pos}")
 
     # combine them
     result = CompositeVideoClip([video, txt_clip])

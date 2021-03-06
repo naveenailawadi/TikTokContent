@@ -1,19 +1,16 @@
 from core.objects import Video
-from constants import DOWNLOAD_FOLDER
+import constants
 from jinja2 import Environment, FileSystemLoader
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium import webdriver
 import shutil
 import requests
 import eel
-import os
-
-DEFAULT_WAIT_INCREMENT = 5
 
 
 # make a class that can download videos
 class TikTokBot:
-    def __init__(self, wait_increment=DEFAULT_WAIT_INCREMENT, headless=False):
+    def __init__(self, wait_increment=constants.DEFAULT_WAIT_INCREMENT, headless=False):
         # set the wait increment
         self.wait_increment = wait_increment
 
@@ -38,7 +35,7 @@ class TikTokBot:
 
     # use the link and filepath (home folder designated by another function in the program)
 
-    def download_video(self, filename, link=None, end_directory=os.getcwd()):
+    def download_video(self, filename, link=None, end_directory=constants.DESTINATION_FOLDER):
         # go to the url if it is indicated
         if link:
             self.driver.get(link)
@@ -51,14 +48,16 @@ class TikTokBot:
         source_link = video_elem.get_attribute('src')
 
         # add the video to a new element (all in javascript --> use jinja)
-        self.download(source_link, filename, end_directory)
+        output_filepath = self.download(source_link, filename, end_directory)
+
+        return output_filepath
 
     def hover_click(self, element):
         hover = ActionChains(self.driver).move_to_element(
             element).click()
         hover.perform()
 
-    def download(self, source_link, filename, end_directory=os.getcwd()):
+    def download(self, source_link, filename, end_directory=constants.DESTINATION_FOLDER):
         # set the environment with the js
         env = Environment(loader=FileSystemLoader('core'))
         template = env.get_template('download.js')
@@ -77,7 +76,11 @@ class TikTokBot:
         eel.sleep(self.wait_increment * 2)
 
         # move it from the download folder to the current directory
-        shutil.move(f"{DOWNLOAD_FOLDER}/{filename}", end_directory)
+        shutil.move(f"{constants.DOWNLOAD_FOLDER}/{filename}", end_directory)
+
+        output_filepath = f"{end_directory}/{filename}"
+
+        return output_filepath
 
     def close(self):
         self.driver.quit()

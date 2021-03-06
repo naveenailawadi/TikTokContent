@@ -24,31 +24,21 @@
                                     </td>
                                 </tr>
                                 <!--Row for choosing a caption-->
-                                <tr id="chooseCaption">
+                                <tr id="chooseCaption" style="display: none">
                                     <td>
                                         <h3>Click a caption to add it:</h3>
                                     </td>
                                     <td></td>
                                     <td id="captionOptions">
-                                        <p></p>
-                                        <p>
-                                            <button class="btn btn-warning" onclick="fillCaption();">THIS IS THE APPROPRIATE LENGTH OF A CAPTION</button>
-                                        </p>
-                                        <br>
-                                        <p>
-                                            <button class="btn btn-warning" onclick="fillCaption();">THIS IS THE APPROPRIATE LENGTH OF A CAPTION</button>
-                                        </p>
-                                        <br>
-                                        <p>
-                                            <button class="btn btn-warning" onclick="fillCaption();">THIS IS THE APPROPRIATE LENGTH OF A CAPTION</button>
-                                        </p>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td>
-                                        <input class="form-control" type="text" id="caption" placeholder="Caption">
+                                        <textarea class="form-control" type="text" id="caption" rows="5" placeholder="Caption"></textarea>
                                     </td>
-                                    <td></td>
+                                    <td>
+                                        <input class="form-control" type="text" id="filename" placeholder="Filename (.mp4)">
+                                    </td>
                                     <td>
                                         <button class="btn btn-primary" onclick="createVideo();">Create Video</button>
                                     </td>

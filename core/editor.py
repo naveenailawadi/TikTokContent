@@ -37,7 +37,7 @@ def add_text(infile, outfile, text, fontsize=constants.DEFAULT_FONTSIZE,
 
     # make a textclip
     txt_clip = (TextClip(text, fontsize=fontsize,
-                         color=color, font=font, method='caption', size=(x, y))
+                         color=color, font=font, method='caption', size=(x, y), align=constants.DEFAULT_ALIGN)
                 .set_duration(video.duration)
                 .set_pos(pos))
 

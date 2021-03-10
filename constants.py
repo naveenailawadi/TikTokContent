@@ -14,9 +14,13 @@ DEFAULT_LBORDER = 110
 DEFAULT_TBORDER = 60
 DEFAULT_BBORDER = 60
 
+
 # set amount to trim text overflow (can be important when adding horizontal padding)
 HCROP = 45
 VCROP = 0
+
+# align the text
+DEFAULT_ALIGN = 'East'
 
 # color is a mix of rgb
 DEFAULT_BORDER_COLOR = (255, 255, 255)

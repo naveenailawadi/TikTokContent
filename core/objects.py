@@ -11,8 +11,15 @@ class Comment:
             './/*//p//span[@class="jsx-1335515755"]').text
 
         # find the like count
-        self.likes = int(element.find_element_by_xpath(
-            './/*//span[@class="jsx-1335515755 count"]').text)
+        likes_str = element.find_element_by_xpath(
+            './/*//span[@class="jsx-1335515755 count"]').text
+
+        # check for a "k" in the likes string
+        if "k" in likes_str.lower():
+            # trim it and multiply it
+            self.likes = int(likes_str[:-1]) * 1000
+        else:
+            self.likes = int(likes_str)
 
 
 # make a video object

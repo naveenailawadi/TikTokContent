@@ -2,3 +2,4 @@ Eel
 Jinja2
 selenium
 moviepy
+requests

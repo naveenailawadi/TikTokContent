@@ -12,7 +12,7 @@ DEFAULT_WAIT_INCREMENT = 3
 DEFAULT_RBORDER = 110
 DEFAULT_LBORDER = 110
 DEFAULT_TBORDER = 60
-DEFAULT_BBORDER = 60
+DEFAULT_BBORDER = 0
 
 
 # set amount to trim text overflow (can be important when adding horizontal padding)
@@ -50,4 +50,4 @@ DEFAULT_POSITION = (45, -550)
 
 # see docs folder for complex options
 DEFAULT_COLOR = 'black'
-DEFAULT_FONT = 'Times-Roman'
+DEFAULT_FONT = 'Helvetica'

@@ -7,19 +7,19 @@ import eel
 class Comment:
     def __init__(self, element):
         # use the element to get the text
-        self.text = element.find_element_by_xpath(
-            './/*//p//span[@class="jsx-1335515755"]').text
+        self.text = element.find_elements_by_xpath(
+            './/*//span')[2].text
 
         # find the like count
-        likes_str = element.find_element_by_xpath(
-            './/*//span[@class="jsx-1335515755 count"]').text
+        likes_str = element.find_elements_by_xpath(
+            './/*//span')[5].text
 
         # check for a "k" in the likes string
         if "k" in likes_str.lower():
             # trim it and multiply it
-            self.likes = int(likes_str[:-1]) * 1000
+            self.likes = float(likes_str[:-1]) * 1000
         else:
-            self.likes = int(likes_str)
+            self.likes = float(likes_str)
 
 
 # make a video object
@@ -74,7 +74,7 @@ class Video:
 
         # get the comments
         comment_elems = self.driver.find_elements_by_xpath(
-            '//div[@class="jsx-1335515755 comment-content level-1 comment-pc"]')
+            '//div[@class="jsx-966068288 comment-item comment-pc"]')
 
         # get them all into comment objects
         self.comments = [Comment(elem) for elem in comment_elems]
